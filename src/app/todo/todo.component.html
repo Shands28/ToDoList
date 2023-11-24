@@ -1,0 +1,47 @@
+<div class="todo">
+  <h1 class="todo__title">{{'pageTitle' | translate}}</h1>
+  <ul class="todo__list">
+    <li>
+      <form class="todo__form" (ngSubmit)="addTodo()">
+        <mat-form-field appearance="outline">
+          <mat-label>{{'todoInput' | translate}}</mat-label>
+          <input matInput type="text" value="" [formControl]="newTodo">
+        </mat-form-field>
+        <button mat-mini-fab class="todo__icon" [disabled]="newTodo.value === ''">
+          <mat-icon>add</mat-icon>
+        </button>
+      </form>
+    </li>
+    <li class="todo__button">
+      <mat-chip-listbox aria-label="Fish selection" [(ngModel)]="todoFilter" (ngModelChange)="filterTodos()">
+        <mat-chip-option value="all" [disabled]="todoFilter==='all'">
+          {{'all' | translate}} ({{todoList.length}})
+        </mat-chip-option>
+        <mat-chip-option value="completed" [disabled]="todoFilter==='completed'">
+          {{'completed' | translate}} ({{todosCompleted}})
+        </mat-chip-option>
+        <mat-chip-option value="pending" [disabled]="todoFilter==='pending'">
+          {{'pending' | translate}} ({{todosPending}})
+        </mat-chip-option>
+      </mat-chip-listbox>
+    </li>
+    <li *ngFor="let todo of filterTodos(); let i = index" class="todo__item"
+        [ngClass]="{'todo__item-completed': todo.completed, 'todo__item-editing': editing && editingIndex === i}">
+      <div *ngIf="!editing || editingIndex !== i" (click)="changeEditing(i, todo.title)">{{todo.title}}</div>
+      <div *ngIf="editing && editingIndex === i" class="todo__input">
+        <input #editTodoInput type="text" [(ngModel)]="editingTitle">
+        <button mat-mini-fab class="todo__icon" (click)="editTodoTitle(todo)">
+          <mat-icon>done</mat-icon>
+        </button>
+        <button mat-mini-fab class="todo__icon" (click)="changeEditing(null)">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <mat-checkbox [checked]="todo.completed" (click)="completeTodo(todo)"></mat-checkbox>
+      <mat-icon (click)="deleteTodo($event, todo.id)" class="todo__delete">delete</mat-icon>
+    </li>
+    <li *ngIf="todoList.length === 0" class="todo__item todo__item-empty">
+      {{'noTodosFound' | translate}}
+    </li>
+  </ul>
+</div>

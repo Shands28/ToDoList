@@ -1,0 +1,9 @@
+{
+  "pageTitle": "TODO App",
+  "todoInput": "Add Task",
+  "all": "All",
+  "completed": "Completed",
+  "pending": "Pending",
+  "todoAddButton": "Add todo to list",
+  "noTodosFound": "There are no TODOs, add one to start tracking your TODOs"
+}

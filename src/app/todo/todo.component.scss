@@ -1,0 +1,103 @@
+.todo {
+  display: grid;
+  padding: 1.5em;
+  border-radius: 10px;
+  background-color: #fff;
+  width: 48ch;
+
+  &__title {
+    font-size: 3rem;
+    text-align: center;
+  }
+
+  &__list {
+    box-shadow: rgba(0, 0, 0, 0.12) 0 1px 3px, rgba(0, 0, 0, 0.24) 0 1px 2px;
+    border-radius: 5px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 60vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  &__button, &__form {
+    margin: 1em 1em 0 1em;
+  }
+
+  &__form {
+    display: grid;
+    grid-template-columns: 1fr 40px;
+    column-gap: 0.5rem;
+    align-items: center;
+  }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+  }
+
+  &__icon {
+    margin-bottom: 22px;
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: 1fr 48px;
+    align-items: center;
+    padding: 1em;
+    transition: all .5s;
+    height: 48px;
+    stroke: #000066;
+
+    &-completed {
+      opacity: 0.5;
+    }
+
+    &--empty {
+      grid-template-columns: 1fr;
+    }
+
+    &:hover {
+      cursor: pointer;
+      grid-template-columns: 1fr 48px 48px;
+      box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0, rgba(60, 64, 67, 0.15) 0 1px 3px 1px;
+    }
+
+    &:hover .todo__delete {
+      display: initial;
+    }
+
+    &-editing:hover {
+      grid-template-columns: 1fr 48px;
+    }
+
+    &-editing:hover .todo__delete {
+      display: none;
+    }
+  }
+
+  &__input {
+    display: flex;
+    align-items: center;
+    column-gap: .5em;
+
+    button {
+      margin-bottom: 0;
+    }
+  }
+
+  &__item-empty:hover {
+    cursor: initial;
+    box-shadow: none;
+    grid-template-columns: 1fr;
+  }
+
+  &__delete {
+    display: none;
+    padding: 0 .5em;
+    transition: all 1s;
+  }
+}
+
+
